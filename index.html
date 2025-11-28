@@ -3,24 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>R-Wheel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
     body {
         font-family: "Courier New", monospace;
         background: #000;
-        color: #00ff66;
+        color: #0aff0a;
         text-align: center;
         padding: 20px;
+        margin: 0;
     }
 
     h2 {
-        color: #00ff66;
-        text-shadow: 0 0 10px #00ff66;
+        font-size: 28px;
+        margin-bottom: 15px;
+        text-shadow: 0 0 8px #0aff0a;
     }
 
     #wheelContainer {
         position: relative;
-        width: 400px;
-        height: 400px;
+        width: 90vw;
+        max-width: 400px;
+        height: 90vw;
+        max-height: 400px;
         margin: auto;
     }
 
@@ -28,43 +34,38 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        border: 6px solid #00ff66;
-        box-shadow: 0 0 20px #00ff66;
+        border: 4px solid #0aff0a;
         transition: transform 4s cubic-bezier(0.25, 0.1, 0.1, 1);
     }
 
-    /* Neon Green Down-facing arrow */
+    /* Arrow */
     #arrow {
         position: absolute;
-        top: 380px;
+        bottom: -10px;
         left: 50%;
         transform: translateX(-50%);
         width: 0;
         height: 0;
-        border-left: 20px solid transparent;
-        border-right: 20px solid transparent;
-        border-top: 30px solid #00ff66;
-        filter: drop-shadow(0 0 6px #00ff66);
+        border-left: 18px solid transparent;
+        border-right: 18px solid transparent;
+        border-top: 26px solid #0aff0a;
         z-index: 10;
     }
 
     #spinBtn {
         margin-top: 15px;
         padding: 12px 30px;
-        background: #00ff66;
-        color: #000;
-        border: none;
-        font-size: 20px;
+        background: transparent;
+        border: 2px solid #0aff0a;
+        color: #0aff0a;
+        font-size: 18px;
         cursor: pointer;
-        border-radius: 10px;
-        font-family: "Courier New", monospace;
-        font-weight: bold;
-        box-shadow: 0 0 15px #00ff66;
+        border-radius: 8px;
+        text-shadow: 0 0 5px #0aff0a;
     }
-
     #spinBtn:hover {
-        background: #00cc55;
-        box-shadow: 0 0 20px #00ff66;
+        background: #0aff0a;
+        color: #000;
     }
 
     #inputs {
@@ -72,75 +73,74 @@
     }
 
     textarea {
-        width: 260px;
+        width: 80%;
+        max-width: 300px;
         padding: 6px;
         background: #111;
-        border: 2px solid #00ff66;
-        color: #00ff66;
-        font-family: "Courier New", monospace;
-        border-radius: 8px;
+        color: #0aff0a;
+        border: 1px solid #0aff0a;
+        border-radius: 6px;
+        font-family: "Courier New";
     }
 
-    #inputs button {
-        margin-top: 10px;
-        padding: 10px 20px;
-        background: #00ff66;
-        border: none;
-        color: black;
-        border-radius: 8px;
+    button {
+        background: transparent;
+        border: 2px solid #0aff0a;
+        color: #0aff0a;
+        padding: 8px 20px;
         cursor: pointer;
-        font-family: "Courier New", monospace;
-        box-shadow: 0 0 10px #00ff66;
+        margin-top: 10px;
+        border-radius: 6px;
+        text-shadow: 0 0 5px #0aff0a;
+    }
+    button:hover {
+        background: #0aff0a;
+        color: #000;
     }
 
     /* Result Popup */
     #resultBox {
         display: none;
         position: fixed;
-        top: 50%; left: 50%;
+        top: 50%; 
+        left: 50%;
         transform: translate(-50%, -50%);
-        background: black;
-        padding: 30px 60px;
-        border-radius: 12px;
-        font-size: 32px;
+        background: #000;
+        padding: 25px 50px;
+        border-radius: 10px;
+        font-size: 28px;
         font-weight: bold;
-        color: #00ff66;
-        border: 3px solid #00ff66;
-        box-shadow: 0 0 25px #00ff66;
-        text-shadow: 0 0 10px #00ff66;
+        color: #0aff0a;
+        box-shadow: 0 0 20px #0aff0a;
+        border: 2px solid #0aff0a;
         z-index: 9999;
     }
 
-    /* Confetti layer */
     #confetti {
         position: fixed;
-        top: 0;
-        left: 0;
+        top: 0; left: 0;
         width: 100%;
         height: 100%;
         pointer-events: none;
         z-index: 150;
     }
 
-    /* Footer */
-    #footer {
+    footer {
         margin-top: 40px;
+        color: #0aff0a;
         font-size: 14px;
-        opacity: 0.7;
+        opacity: 0.8;
     }
-
-    #footer a {
-        color: #00ff66;
-        text-decoration: none;
-        text-shadow: 0 0 10px #00ff66;
+    footer a {
+        color: #0aff0a;
+        text-decoration: underline;
     }
 </style>
 </head>
 <body>
 
 <h2>R-Wheel — A Random Wheel.</h2>
-
- Created by <a href="https://www.linkedin.com/in/rivektamang/" target="_blank">Rivek Raj Tamang</a> <br></br>
+Created by <strong>Rivek Raj Tamang (RivuDon)</strong> <br></br>
 
 <div id="wheelContainer">
     <div id="arrow"></div>
@@ -150,40 +150,40 @@
 <button id="spinBtn">SPIN</button>
 
 <div id="inputs">
-    <h3>Customize Wheel Inputs</h3>
-    <textarea id="customText" rows="3" placeholder="Enter values separated by commas"></textarea>
-    <br><br>
-    <button onclick="updateWheel()">Update Wheel</button>
+    <h3>Customize Wheel (comma separated)</h3>
+    <textarea id="customText" rows="3" placeholder="YES,NO,MAYBE"></textarea>
+    <br>
+    <button onclick="updateWheel()">UPDATE</button>
 </div>
 
-<!-- Result Popup -->
 <div id="resultBox"></div>
-
-<!-- Confetti Canvas -->
 <canvas id="confetti"></canvas>
 
-<!-- Footer -->
-<div id="footer">
-    Created by <a href="https://www.linkedin.com/in/rivektamang/" target="_blank">Rivek Raj Tamang</a>
-</div>
+<footer>
+    Created by <strong>Rivek Raj Tamang (RivuDon)</strong>  
+    <br><a href="https://www.linkedin.com/in/rivektamang/" target="_blank">LinkedIn Profile</a>
+</footer>
 
 <script>
+    // ---------------------------
+    // WHEEL CANVAS
+    // ---------------------------
     let canvas = document.getElementById("wheel");
     let ctx = canvas.getContext("2d");
     canvas.width = 400;
     canvas.height = 400;
 
-    // Default 4 YES + 4 NO
     let options = ["YES","NO","YES","NO","YES","NO","YES","NO"];
     let angle = 0;
     let spinning = false;
 
     function drawWheel() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         let arc = (2 * Math.PI) / options.length;
 
         for (let i = 0; i < options.length; i++) {
             ctx.beginPath();
-            ctx.fillStyle = i % 2 === 0 ? "#003300" : "#004400";
+            ctx.fillStyle = i % 2 === 0 ? "#003300" : "#004d00";
             ctx.moveTo(200, 200);
             ctx.arc(200, 200, 190, arc * i, arc * (i + 1));
             ctx.fill();
@@ -192,20 +192,22 @@
             ctx.translate(200, 200);
             ctx.rotate(arc * i + arc / 2);
             ctx.textAlign = "right";
-            ctx.fillStyle = "#00ff66";
-            ctx.font = "20px Courier New";
-            ctx.fillText(options[i], 170, 10);
+            ctx.fillStyle = "#0aff0a";
+            ctx.font = "18px Courier New";
+            ctx.fillText(options[i], 160, 10);
             ctx.restore();
         }
     }
-
     drawWheel();
 
+    // ---------------------------
+    // SPIN LOGIC
+    // ---------------------------
     document.getElementById("spinBtn").onclick = function () {
         if (spinning) return;
         spinning = true;
 
-        let randomRotation = Math.floor(Math.random() * 2000) + 2000;
+        let randomRotation = Math.random() * 2000 + 2000;
         angle += randomRotation;
         canvas.style.transform = `rotate(${angle}deg)`;
 
@@ -215,11 +217,9 @@
         }, 4000);
     };
 
-    // Detect selected slice
     function getResult() {
         let sliceAngle = 360 / options.length;
         let adjustedAngle = (angle % 360 + 360) % 360;
-
         let pointerAngle = (270 - adjustedAngle + 360) % 360;
         let index = Math.floor(pointerAngle / sliceAngle);
         return options[index];
@@ -235,7 +235,7 @@
 
         setTimeout(() => {
             box.style.display = "none";
-        }, 3000);
+        }, 2500);
     }
 
     function updateWheel() {
@@ -243,11 +243,12 @@
         if (input.length > 0) {
             options = input.split(",").map(x => x.trim());
         }
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawWheel();
     }
 
-    // Confetti
+    // ---------------------------
+    // CONFETTI
+    // ---------------------------
     const confettiCanvas = document.getElementById("confetti");
     const confettiCtx = confettiCanvas.getContext("2d");
     confettiCanvas.width = window.innerWidth;
@@ -260,9 +261,9 @@
         for (let i = 0; i < 150; i++) {
             confettiPieces.push({
                 x: Math.random() * confettiCanvas.width,
-                y: Math.random() * confettiCanvas.height - confettiCanvas.height,
-                size: Math.random() * 8 + 4,
-                color: `hsl(${Math.random() * 360}, 70%, 50%)`,
+                y: -Math.random() * 400,
+                size: Math.random() * 6 + 3,
+                color: `hsl(${Math.random() * 100 + 120}, 70%, 50%)`,
                 speed: Math.random() * 3 + 2
             });
         }
